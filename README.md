@@ -2,9 +2,6 @@
 
 This web application was created using the Flask framework and is about predicting images from 
 various nature scenes (classification into 1 out of 6 image categories) based on a deep learning model trained using convulsive neural networks.
-
-Dataset (images from various nature scenes):
-
 Number of images in the train set :  14034
 Number of images in the test set ;  3000
 Number of images in prediction set :  7301
