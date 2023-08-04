@@ -26,11 +26,11 @@ from tensorflow.python.keras.models import model_from_json
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-root_path = 'Project_CNN/'
+root_path = 'Images/'
 train_pred_test_folders = os.listdir(root_path)
-seg_train_folders = 'Project_CNN/seg_train/'
-seg_test_folders = 'Project_CNN/seg_test/'
-seg_pred_folders = 'Project_CNN/seg_pred/'
+seg_train_folders = 'Images/seg_train/'
+seg_test_folders = 'Images/seg_test/'
+seg_pred_folders = 'Images/seg_pred/'
 number_tra = {}
 number_tes = {}
 for folder in os.listdir(seg_train_folders):
@@ -163,12 +163,12 @@ def predict_image(filename, model):
     plt.title(f"Prediction {str(class_names[index])}", size=18, color='red')
     plt.imshow(img_array)
 
-predict_image('Project_CNN/seg_pred/183.jpg', benchmark_model)
-predict_image('Project_CNN/seg_pred/171.jpg', benchmark_model)
-predict_image('Project_CNN/seg_pred/222.jpg', benchmark_model)
-predict_image('Project_CNN/seg_pred/182.jpg', benchmark_model)
-predict_image('Project_CNN/seg_pred/5619.jpg', benchmark_model)
-predict_image('Project_CNN/seg_pred/5151.jpg', benchmark_model)
+predict_image('Images/seg_pred/183.jpg', benchmark_model)
+predict_image('Images/seg_pred/171.jpg', benchmark_model)
+predict_image('Images/seg_pred/222.jpg', benchmark_model)
+predict_image('Images/seg_pred/182.jpg', benchmark_model)
+predict_image('Images/seg_pred/5619.jpg', benchmark_model)
+predict_image('Images/seg_pred/5151.jpg', benchmark_model)
 
 #zapisanie modelu
 # modelCNN_json - architektura sieci neuronowej
