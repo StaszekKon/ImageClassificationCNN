@@ -86,5 +86,24 @@ for images, labels in train_ds.take(1):
         plt.title(class_names[labels[i]])
         plt.axis("off")
 
-#konfiguracja epok
+#konfiguracja epok, budowa architektury sieci neuronowej, CNN
 benchmark_epoch = 8
+
+benchmark_model = Sequential()
+benchmark_model.add(tf.keras.layers.Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=(224,224,3)))
+benchmark_model.add(tf.keras.layers.MaxPooling2D(2,2))
+benchmark_model.add(tf.keras.layers.Conv2D(32, kernel_size=(3, 3), activation='relu'))
+benchmark_model.add(tf.keras.layers.MaxPooling2D(2,2))
+benchmark_model.add(tf.keras.layers.Conv2D(64, kernel_size=(3, 3), activation='relu'))
+benchmark_model.add(tf.keras.layers.MaxPooling2D(2,2))
+benchmark_model.add(tf.keras.layers.Conv2D(64, kernel_size=(3, 3), activation='relu'))
+benchmark_model.add(tf.keras.layers.MaxPooling2D(2,2))
+benchmark_model.add(tf.keras.layers.Conv2D(64, kernel_size=(3, 3), activation='relu'))
+benchmark_model.add(tf.keras.layers.MaxPooling2D(2,2))
+benchmark_model.add(tf.keras.layers.Flatten())
+benchmark_model.add(tf.keras.layers.Dense(1024, activation='relu'))
+benchmark_model.add(tf.keras.layers.Dropout(0.2))
+benchmark_model.add(tf.keras.layers.Dense(128, activation='relu'))
+benchmark_model.add(tf.keras.layers.Dropout(0.2))
+benchmark_model.add(tf.keras.layers.Dense(6, activation='softmax'))
+benchmark_model.summary()
