@@ -24,7 +24,7 @@ from keras.layers import GlobalMaxPooling2D, GlobalAveragePooling2D, Dropout, De
 from keras.layers import Conv2D, MaxPooling2D, Flatten,  BatchNormalization, Activation
 from keras.preprocessing import image
 
-# os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 root_path = 'Project_CNN/'
 train_pred_test_folders = os.listdir(root_path)
@@ -53,7 +53,7 @@ print("Number of images in prediction set : ", number_of_images_in_prediction_se
 
 plt.show()
 ############
-train_datagen = ImageDataGenerator( rescale = 1.0/255.,shear_range=0.2,zoom_range=0.2)
+train_datagen = ImageDataGenerator(rescale=1.0/255.,shear_range=0.2,zoom_range=0.2)
 
 # skalujemy dane 1.0/255 -  normalizacja
 train_generator = train_datagen.flow_from_directory(seg_train_folders,
@@ -106,4 +106,22 @@ benchmark_model.add(tf.keras.layers.Dropout(0.2))
 benchmark_model.add(tf.keras.layers.Dense(128, activation='relu'))
 benchmark_model.add(tf.keras.layers.Dropout(0.2))
 benchmark_model.add(tf.keras.layers.Dense(6, activation='softmax'))
-benchmark_model.summary()
+print(benchmark_model.summary())
+#kompilacja modelu NN
+benchmark_model.compile(
+  optimizer='adam',
+  loss='categorical_crossentropy',
+  metrics=['acc'])
+
+# ustawienie EARLY STOPPING CALL o model check point API
+earlystopping = EarlyStopping(monitor='val_loss',
+                                              patience=2,
+                                              verbose=1,
+                                              mode='min'
+                                              )
+checkpointer = ModelCheckpoint(filepath='bestvalue', verbose=0, save_best_only=True)
+callback_list = [checkpointer, earlystopping]
+
+Ilosc_iteracji = 14034/32
+#trenowanie modelu
+history_model  = benchmark_model.fit(train_generator,epochs=benchmark_epoch, verbose=1, validation_data = validation_generator, callbacks=callback_list)
