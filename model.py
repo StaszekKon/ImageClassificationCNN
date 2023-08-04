@@ -3,10 +3,19 @@ from keras.models import load_model
 from keras.utils import img_to_array
 import numpy as np
 from PIL import Image
+from tensorflow.python.keras.models import model_from_json
 
-# Loading model
-model = load_model("model.h5")
+# załądowanie architektury modelu
+json_file = open('modelCNN.json','r')
+loaded_model_json = json_file.read()
+json_file.close()
 
+
+loaded_model = model_from_json(loaded_model_json)
+
+# załadowanie wag w nowym modelu
+
+loaded_model.load_weights("model.h5")
 # przygotowanie i preprocessing obrazu
 def preprocess_img(img_path):
     op_img = Image.open(img_path)
@@ -18,5 +27,5 @@ def preprocess_img(img_path):
 
 # Predicting function
 def predict_result(predict):
-    pred = model.predict(predict)
+    pred = loaded_model.predict(predict)
     return np.argmax(pred[0], axis=-1)
