@@ -12,7 +12,6 @@ from sklearn.metrics import classification_report
 from collections import Counter
 import tensorflow as tf
 
-import keras
 from keras.preprocessing.image import ImageDataGenerator
 from keras.callbacks import ReduceLROnPlateau
 from keras.applications.resnet50 import ResNet50
@@ -23,6 +22,7 @@ from keras.optimizers import Adam, SGD
 from keras.layers import GlobalMaxPooling2D, GlobalAveragePooling2D, Dropout, Dense, Input, Conv2D, Flatten,MaxPooling3D
 from keras.layers import Conv2D, MaxPooling2D, Flatten,  BatchNormalization, Activation
 from keras.preprocessing import image
+from tensorflow.python.keras.models import model_from_json
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -125,3 +125,78 @@ callback_list = [checkpointer, earlystopping]
 Ilosc_iteracji = 14034/32
 #trenowanie modelu
 history_model  = benchmark_model.fit(train_generator,epochs=benchmark_epoch, verbose=1, validation_data = validation_generator, callbacks=callback_list)
+
+#Evaluacja (ocena) modelu
+loss, accuracy = benchmark_model.evaluate(validation_generator)
+print(f"Loss: {loss:.2f}, Accuracy: {accuracy * 100:.2f}%")
+
+#Wykres  training i validation accuracy
+plt.figure(figsize=(12, 6))
+plt.plot(history_model.history['acc'], label='Training Accuracy')
+plt.plot(history_model.history['val_acc'], label='Validation Accuracy')
+plt.title('Training and Validation Accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+#Wykres training i validation loss
+plt.figure(figsize=(12, 6))
+plt.plot(history_model.history['loss'], label='Training Loss')
+plt.plot(history_model.history['val_loss'], label='Validation Loss')
+plt.title('Training and Validation Loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+def predict_image(filename, model):
+    img_ = image.load_img(filename, target_size=(224, 224))
+    img_array = image.img_to_array(img_)
+    img_processed = np.expand_dims(img_array, axis=0)
+    img_processed /= 255.
+    prediction = model.predict(img_processed)
+    index = np.argmax(prediction)
+    # plt.title("Prediction - {}".format(str(class_names[index]).title()), size=18, color='red')
+    plt.title(f"Prediction {str(class_names[index])}", size=18, color='red')
+    plt.imshow(img_array)
+
+predict_image('Project_CNN/seg_pred/183.jpg', benchmark_model)
+predict_image('Project_CNN/seg_pred/171.jpg', benchmark_model)
+predict_image('Project_CNN/seg_pred/222.jpg', benchmark_model)
+predict_image('Project_CNN/seg_pred/182.jpg', benchmark_model)
+predict_image('Project_CNN/seg_pred/5619.jpg', benchmark_model)
+predict_image('Project_CNN/seg_pred/5151.jpg', benchmark_model)
+
+#zapisanie modelu
+# modelCNN_json - architektura sieci neuronowej
+# model.h5 - plik binarny z wagami
+modelCNN_json = benchmark_model.to_json()
+with open("modelCNN.json", "w") as json_file:
+    json_file.write(modelCNN_json)
+
+# zapisanie wag do HDF5
+benchmark_model.save_weights("model.h5")
+
+# zapisanie do zmiennej zapisanego wczęsniej modelu
+json_file = open('modelCNN.json','r')
+loaded_model_json = json_file.read()
+json_file.close()
+
+loaded_model = model_from_json(loaded_model_json)
+
+# załadowanie wag w nowym modelu
+
+loaded_model.load_weights("model.h5")
+print("Załadowany wytrenowany wcześniej model")
+
+# kompilacja modelu
+
+loaded_model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['accuracy'])
+loss, accuracy = loaded_model.evaluate(validation_generator)
+print('loss:', loss)
+print('accuracy:', accuracy)
+graph = tf.get_default_graph()
+print(graph)
