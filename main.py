@@ -192,11 +192,4 @@ loaded_model = model_from_json(loaded_model_json)
 loaded_model.load_weights("model.h5")
 print("Załadowany wytrenowany wcześniej model")
 
-# kompilacja modelu
 
-loaded_model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['accuracy'])
-loss, accuracy = loaded_model.evaluate(validation_generator)
-print('loss:', loss)
-print('accuracy:', accuracy)
-graph = tf.get_default_graph()
-print(graph)
