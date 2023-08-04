@@ -1,12 +1,8 @@
 # Images Recognition with various nature scenes (Classification based on 6 classes, categories of images)
-
+#  + web application API FLASK
 This web application was created using the Flask framework and is about predicting images from 
 various nature scenes (classification into 1 out of 6 image categories) based on a deep learning model trained using convulsive neural networks.
-
-Number of images in the train set :  14034
-Number of images in the test set ;  3000
-Number of images in prediction set :  7301
-
+Dataset (24 335 images)
 Steps are:
 + Build the model,
 + Compile the model,
