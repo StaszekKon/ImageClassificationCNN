@@ -4,9 +4,9 @@ from model import preprocess_img, predict_result
 import os
 from werkzeug.utils import secure_filename
 
-IMAGES_FOLDER = os.path.join('Images', 'seg_pred')
-# Instantiating flask app
-app = Flask(__name__, static_folder='Images')
+IMAGES_FOLDER = os.path.join('static/Images', 'seg_pred')
+# Instancja app Flask
+app = Flask(__name__)
 app.config['IMAGES_FOLDER'] = IMAGES_FOLDER
 
 
