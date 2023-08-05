@@ -1,25 +1,31 @@
 # Importing required libs
 from flask import Flask, render_template, request
 from model import preprocess_img, predict_result
+import os
 
+IMAGES_FOLDER = os.path.join('Images', 'seg_pred')
 # Instantiating flask app
-app = Flask(__name__)
-
+app = Flask(__name__, static_folder = 'Images')
+app.config['IMAGES_FOLDER'] = IMAGES_FOLDER
 
 # Home route
 @app.route("/")
 def main():
-    return render_template("index.html")
+    full_filename = os.path.join(app.config['IMAGES_FOLDER'], '6451.jpg')
+    img = preprocess_img(full_filename)
+    pred2 = predict_result(img)
+    return render_template("index.html", test = str(pred2))
 
 
 # Prediction route
-@app.route('/prediction', methods=['POST'])
+@app.route('/predict', methods=['POST'])
 def predict_image_file():
     try:
         if request.method == 'POST':
             img = preprocess_img(request.files['file'].stream)
             pred = predict_result(img)
-            return render_template("result.html", predictions=pred)
+            return render_template("result.html", predictions=str(pred))
+
 
     except:
         error = "File cannot be processed."
