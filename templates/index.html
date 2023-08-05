@@ -6,12 +6,12 @@
     <link rel="stylesheet" type="text/css" href="static/CSS/style.css">
 </head>
 <body>
-<p> <b>Aplikacja API FLASK</b> służy do testowania modelu sieci neuronowej - CNN - klasyfikator 6 klasowy.<br>
-        Problem dotyczy klasyfikacji zbioru obrazów podzielonych na sześć klas-kategorii (buildings,
+<p> <b>Aplikacja API FLASK</b> służy do testowania (przewidywania, rozpoznawania) wytrenowanego modelu sieci neuronowej - CNN - klasyfikator obrazów 6 - klasowy.<br>
+        Projekt machine learning  dotyczy klasyfikacji -  obrazów podzielonych na 6 klas-kategorii (buildings,
         forest, glacier, mountain, sea, street).
-        <b>Architektura</b> sieci neuronowej została zbudowana w konwencji sekwencyjnej. Sieć została wytrenowana na zbiorze treningowym.
-        Model (architektura i wagi) zostały zapisane do pliku.
-
+        <b>Zastosowana architektura</b> sieci neuronowej została zbudowana w konwencji sekwencyjnej.
+          Model oparty na CNN (architektura i wagi) został zbudowany podczas treningu i zapisany do pliku.
+          Na podstawie technologii Flask wykonano renderowanie 2 templates Ninja2, powstały dwa endpointy ("/", /predict).
 </p>
 <div class ="image">
     <img src="{{filename}}" alt="image">
