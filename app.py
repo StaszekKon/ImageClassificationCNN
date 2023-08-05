@@ -11,10 +11,11 @@ app.config['IMAGES_FOLDER'] = IMAGES_FOLDER
 # Home route
 @app.route("/")
 def main():
-    full_filename = os.path.join(app.config['IMAGES_FOLDER'], '6451.jpg')
+    full_filename = os.path.join(app.config['IMAGES_FOLDER'], '7110.jpg')
     img = preprocess_img(full_filename)
     pred2 = predict_result(img)
-    return render_template("index.html", test = str(pred2))
+
+    return render_template("index.html", class_names = str(pred2), filename = full_filename)
 
 
 # Prediction route

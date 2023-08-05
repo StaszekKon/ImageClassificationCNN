@@ -6,7 +6,8 @@
     <link rel="stylesheet" type="text/css" href="static/CSS/style.css">
 </head>
 <body>
-<img src="{{test}}" alt="Image">
+<img src="{{filename}}" alt="Image">
+<p>{{class_names}}</p>
 <!--<form action="{{ url_for('predict_image_file')}}" enctype="multipart/form-data" method="POST">-->
 <form action="{{ url_for('predict_image_file') }}" enctype="multipart/form-data" method="POST">
   <label for="fimage"> Choose a  picture:</label>

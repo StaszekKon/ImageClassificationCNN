@@ -20,6 +20,7 @@ loaded_model = model_from_json(loaded_model_json)
 
 loaded_model.load_weights("model.h5")
 # przygotowanie i preprocessing obrazu
+# img_path = 'Images/seg_pred/182.jpg'
 def preprocess_img(img_path):
     # op_img = Image.open(img_path)
     # img_resize = op_img.resize((224, 224))
@@ -36,4 +37,23 @@ def preprocess_img(img_path):
 # Predicting function
 def predict_result(img_processed):
     pred = loaded_model.predict(img_processed)
-    return np.argmax(pred[0], axis=-1)
+    # return np.argmax(pred[0], axis=-1)
+    index = np.argmax(pred[0])
+    if index == 0:
+        class_names = "buildings"
+    elif index == 1:
+        class_names = "forest"
+    elif index == 2:
+        class_names = "glacier"
+    elif index == 3:
+        class_names = "mountain"
+    elif index == 4:
+        class_names ="sea"
+    elif index == 5:
+        class_names ="street"
+    else:
+        class_names ="zła predykcja"
+
+    # return np.argmax(pred[0])
+    return class_names
+
