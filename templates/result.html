@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+{% if predictions %}
+        <h2>{{predictions}}</h2>
+        {% else %}
+        <h2>{{err}}</h2>
+        {% endif %}
+</body>
+</html>

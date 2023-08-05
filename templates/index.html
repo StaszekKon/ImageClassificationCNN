@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Machine Learning</title>
+    <link rel="stylesheet" type="text/css" href="static/CSS/style.css">
+</head>
+<body>
+<img src="{{test}}" alt="Image">
+<!--<form action="{{ url_for('predict_image_file')}}" enctype="multipart/form-data" method="POST">-->
+<form action="{{ url_for('predict_image_file') }}" enctype="multipart/form-data" method="POST">
+  <label for="fimage"> Choose a  picture:</label>
+  <input type="file" id="fimage" name="image" accept="image/png, image/jpg" /><br>
+
+  <input type="submit" value="Predict">
+</form>
+
+<p>Click on the submit button, and the input will be sent to a page on the server called "result.html".</p>
+
+
+
+</body>
+</html>
