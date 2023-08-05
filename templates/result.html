@@ -2,15 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome result</title>
+    <title>Prediction result</title>
+    <link rel="stylesheet" type="text/css" href="static/CSS/style.css">
 </head>
 <body>
-<img src="{{file_name_img}}" alt="Image">
-<p>Predykcja - nazwa rozpoznanej klasy obrazu {{file_name_img}}:</p>
+    <div class="image">
+        <img src="{{file_name_img}}" alt="Image">
+    </div>
+    <div id ="label_pred">
+        <p>Predykcja obrazu {{file_name_img}}:</p>
+    </div>
+    <div class ="class_prediction">
         {% if predictions %}
         <h1>{{predictions}}</h1>
         {% else %}
         <h1>{{err}}</h1>
         {% endif %}
+    </div>
 </body>
 </html>

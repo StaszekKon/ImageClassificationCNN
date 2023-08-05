@@ -6,13 +6,32 @@
     <link rel="stylesheet" type="text/css" href="static/CSS/style.css">
 </head>
 <body>
-<img src="{{filename}}" alt="Image">
-<p>Predykcja domyślniego obrazu: <b>{{class_names}}</b></p><br><br>
+<p> <b>Aplikacja</b> służy do testowania modelu sieci neuronowej - CNN - klasyfikator 6 klasowy.<br>
+        Problem dotyczy klasyfikacji zbioru obrazów podzielonych na sześć klas-kategorii (buildings,
+        forest, glacier, mountain, sea, street).
+        <b>Architektura</b> sieci neuronowej została zbudowana w konwencji sekwencyjnej. Sieć została wytrenowana na zbiorze treningowym.
+        Model (architektura i wagi) zostały zapisane do pliku.
+
+</p>
+<div class ="image">
+    <img src="{{filename}}" alt="image">
+</div>
+<div class="class_prediction">
+    <p>Predykcja domyślniego obrazu: <b>{{class_names}}</b></p>
+</div>
 <form action="{{ url_for('predict_image_file') }}" enctype="multipart/form-data" method="POST">
-  <label for="fimage"> Załaduj obraz:</label>
-  <input type="file" id="fimage" name="uploaded-file" accept="image/jpg image/png" /><br><br>
-  <label for="fpredict"> Wykonaj predykcję:</label>
-  <input type="submit" value="Predykcja" id="fpredict">
+    <div id="image_load">
+       <p>
+            <label for="fimage"> Załaduj obraz:</label>
+            <input type="file" id="fimage" name="uploaded-file" accept="image/jpg image/png" /><br><br>
+       </p>
+    </div>
+  <div id="button_prediction">
+      <p>
+            <label for="fpredict"> Wykonaj predykcję załadowanego obrazu:</label>
+            <input type="submit" value="Predykcja" id="fpredict">
+      </p>
+  </div>
 </form>
 </body>
 </html>
