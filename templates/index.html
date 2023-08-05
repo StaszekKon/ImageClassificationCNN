@@ -7,18 +7,12 @@
 </head>
 <body>
 <img src="{{filename}}" alt="Image">
-<p>{{class_names}}</p>
-<!--<form action="{{ url_for('predict_image_file')}}" enctype="multipart/form-data" method="POST">-->
+<p>Predykcja domyślniego obrazu: <b>{{class_names}}</b></p><br><br>
 <form action="{{ url_for('predict_image_file') }}" enctype="multipart/form-data" method="POST">
-  <label for="fimage"> Choose a  picture:</label>
-  <input type="file" id="fimage" name="uploaded-file" accept="image/jpg image/png" /><br>
-
-  <input type="submit" value="Predict">
+  <label for="fimage"> Załaduj obraz:</label>
+  <input type="file" id="fimage" name="uploaded-file" accept="image/jpg image/png" /><br><br>
+  <label for="fpredict"> Wykonaj predykcję:</label>
+  <input type="submit" value="Predykcja" id="fpredict">
 </form>
-
-<p>Click on the submit button, and the input will be sent to a page on the server called "result.html".</p>
-
-
-
 </body>
 </html>

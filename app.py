@@ -16,7 +16,6 @@ def main():
     full_filename = os.path.join(app.config['IMAGES_FOLDER'], '7110.jpg')
     img = preprocess_img(full_filename)
     recognition = predict_result(img)
-
     return render_template("index.html", class_names=str(recognition), filename=full_filename)
 
 

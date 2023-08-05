@@ -6,12 +6,11 @@
 </head>
 <body>
 <img src="{{file_name_img}}" alt="Image">
-<p>Nazwa piku-obrazu poddanego predykcji</p>
-<p>{{file_name_img}}</p>
+<p>Predykcja - nazwa rozpoznanej klasy obrazu {{file_name_img}}:</p>
         {% if predictions %}
-        <h2>{{predictions}}</h2>
+        <h1>{{predictions}}</h1>
         {% else %}
-        <h2>{{err}}</h2>
+        <h1>{{err}}</h1>
         {% endif %}
 </body>
 </html>
