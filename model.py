@@ -3,7 +3,10 @@ from keras.models import load_model
 from keras.utils import img_to_array
 import numpy as np
 from PIL import Image
-from tensorflow.python.keras.models import model_from_json
+import tensorflow as tf
+# from tensorflow.python.keras.models import model_from_json
+from keras.models import model_from_json
+from keras.preprocessing import image
 
 # załądowanie architektury modelu
 json_file = open('modelCNN.json','r')
@@ -18,14 +21,19 @@ loaded_model = model_from_json(loaded_model_json)
 loaded_model.load_weights("model.h5")
 # przygotowanie i preprocessing obrazu
 def preprocess_img(img_path):
-    op_img = Image.open(img_path)
-    img_resize = op_img.resize((224, 224))
-    img2arr = img_to_array(img_resize) / 255.0
-    img_reshape = img2arr.reshape(1, 224, 224, 3)
-    return img_reshape
-
+    # op_img = Image.open(img_path)
+    # img_resize = op_img.resize((224, 224))
+    # img2arr = img_to_array(img_resize) / 255.0
+    # img_reshape = img2arr.reshape(1, 224, 224, 3)
+    # return img_reshape
+    # img_path = 'Images/seg_pred/182.jpg'
+    img_ = image.load_img(img_path, target_size=(224, 224))
+    img_array = image.img_to_array(img_)
+    img_processed = np.expand_dims(img_array, axis=0)
+    img_processed /= 255.
+    return img_processed
 
 # Predicting function
-def predict_result(predict):
-    pred = loaded_model.predict(predict)
+def predict_result(img_processed):
+    pred = loaded_model.predict(img_processed)
     return np.argmax(pred[0], axis=-1)
