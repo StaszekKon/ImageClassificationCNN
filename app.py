@@ -6,8 +6,9 @@ from werkzeug.utils import secure_filename
 
 IMAGES_FOLDER = os.path.join('Images', 'seg_pred')
 # Instantiating flask app
-app = Flask(__name__, static_folder = 'Images')
+app = Flask(__name__, static_folder='Images')
 app.config['IMAGES_FOLDER'] = IMAGES_FOLDER
+
 
 # Home route
 @app.route("/")
@@ -16,24 +17,21 @@ def main():
     img = preprocess_img(full_filename)
     recognition = predict_result(img)
 
-    return render_template("index.html", class_names = str(recognition), filename = full_filename)
+    return render_template("index.html", class_names=str(recognition), filename=full_filename)
 
 
 # Prediction route
-@app.route('/predict', methods=['GET'])
+@app.route('/predict', methods=['POST'])
 def predict_image_file():
     try:
-        if request.method == 'GET':
-            # img = preprocess_img(request.files['file'].stream)
-            # full_filename = os.path.join(app.config['IMAGES_FOLDER'], '7322.jpg')
+        if request.method == 'POST':
             uploaded_img = request.files['uploaded-file']
             img_filename = secure_filename(uploaded_img.filename)
-            # uploaded_img.save(os.path.join(app.config['IMAGES_FOLDER'], img_filename))
-            # img = preprocess_img(img_filename)
-            # pred = predict_result(img)
-            testS = "Ala"
-            return render_template("result.html", predictions="pred", name2 = testS, img2 = img_filename)
-
+            uploaded_img.save(os.path.join(app.config['IMAGES_FOLDER'], img_filename))
+            full_filename = os.path.join(app.config['IMAGES_FOLDER'], img_filename)
+            img = preprocess_img(full_filename)
+            pred = predict_result(img)
+            return render_template("result.html", predictions=pred, file_name_img=full_filename)
 
     except:
         error = "File cannot be processed."

@@ -9,9 +9,9 @@
 <img src="{{filename}}" alt="Image">
 <p>{{class_names}}</p>
 <!--<form action="{{ url_for('predict_image_file')}}" enctype="multipart/form-data" method="POST">-->
-<form action="{{ url_for('predict_image_file') }}" enctype="multipart/form-data" method="GET">
+<form action="{{ url_for('predict_image_file') }}" enctype="multipart/form-data" method="POST">
   <label for="fimage"> Choose a  picture:</label>
-  <input type="file" id="fimage" name="uploaded-file" accept=".jpg" /><br>
+  <input type="file" id="fimage" name="uploaded-file" accept="image/jpg image/png" /><br>
 
   <input type="submit" value="Predict">
 </form>
