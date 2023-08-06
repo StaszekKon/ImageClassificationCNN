@@ -33,7 +33,7 @@ def predict_image_file():
             return render_template("result.html", predictions=pred, file_name_img=full_filename)
 
     except:
-        error = "File cannot be processed."
+        error = "Plik nie może być przeprocesowany."
         return render_template("result.html", err=error)
 
 

@@ -10,7 +10,11 @@
         <img src="{{file_name_img}}" alt="Image">
     </div>
     <div id ="label_pred">
-        <p>Predykcja obrazu {{file_name_img}}:</p>
+        {% if file_name_img %}
+        <p>Predykcja obrazu: {{file_name_img}}:</p>
+         {% else %}
+        <p>Brak wybranego obrazu !!!</p>
+        {% endif %}
     </div>
     <div class ="class_prediction">
         {% if predictions %}

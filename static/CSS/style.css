@@ -15,10 +15,11 @@ body {
     margin-bottom: 10px;
 }
 .class_prediction {
-    border: 2px solid brown;
+    border: 2px solid black;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 10px;
+    background-color: #98FB98
 }
 #image_load {
     border: 2px solid brown;
