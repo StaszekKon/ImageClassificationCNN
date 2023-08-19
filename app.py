@@ -1,4 +1,3 @@
-# Importing required libs
 from flask import Flask, render_template, request
 from model import preprocess_img, predict_result
 import os
@@ -10,7 +9,6 @@ app = Flask(__name__)
 app.config['IMAGES_FOLDER'] = IMAGES_FOLDER
 
 
-# Home route
 @app.route("/")
 def main():
     full_filename = os.path.join(app.config['IMAGES_FOLDER'], '7110.jpg')
@@ -19,7 +17,7 @@ def main():
     return render_template("index.html", class_names=str(recognition), filename=full_filename)
 
 
-# Prediction route
+# trasa dla predykcji (endpoint)
 @app.route('/predict', methods=['POST'])
 def predict_image_file():
     try:
@@ -37,6 +35,5 @@ def predict_image_file():
         return render_template("result.html", err=error)
 
 
-# Driver code
 if __name__ == "__main__":
     app.run(port=9000, debug=True)

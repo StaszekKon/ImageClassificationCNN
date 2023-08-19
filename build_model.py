@@ -2,16 +2,13 @@ import numpy as np
 import pandas as pd
 import random
 import os
-# import cv2
 from IPython.display import Image
 import matplotlib.pyplot as plt
 import seaborn as sns
-
 from keras.utils import plot_model
 from sklearn.metrics import classification_report
 from collections import Counter
 import tensorflow as tf
-
 from keras.preprocessing.image import ImageDataGenerator
 from keras.callbacks import ReduceLROnPlateau
 from keras.applications.resnet50 import ResNet50
@@ -25,7 +22,6 @@ from keras.preprocessing import image
 from tensorflow.python.keras.models import model_from_json
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-
 root_path = 'static/Images/'
 train_pred_test_folders = os.listdir(root_path)
 seg_train_folders = 'static/Images/seg_train/'
@@ -50,7 +46,6 @@ print("Number of images in the train set : ", sum(number_tra.values()))
 print("Number of images in the test set ; ", sum(number_tes.values()))
 number_of_images_in_prediction_set = len(os.listdir(seg_pred_folders))
 print("Number of images in prediction set : ", number_of_images_in_prediction_set)
-
 plt.show()
 ############
 train_datagen = ImageDataGenerator(rescale=1.0/255.,shear_range=0.2,zoom_range=0.2)
@@ -73,11 +68,10 @@ train_ds = tf.keras.utils.image_dataset_from_directory(
   batch_size=32)
 
 ##############
-
 class_names = train_ds.class_names
 print(class_names)
 
-#Wizualizacja danych
+# Wizualizacja danych
 plt.figure(figsize=(10, 10))
 for images, labels in train_ds.take(1):
     for i in range(9):
@@ -86,9 +80,8 @@ for images, labels in train_ds.take(1):
         plt.title(class_names[labels[i]])
         plt.axis("off")
 
-#konfiguracja epok, budowa architektury sieci neuronowej, CNN
+# konfiguracja epok, budowa architektury sieci neuronowej, CNN
 benchmark_epoch = 8
-
 benchmark_model = Sequential()
 benchmark_model.add(tf.keras.layers.Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=(224,224,3)))
 benchmark_model.add(tf.keras.layers.MaxPooling2D(2,2))
@@ -107,7 +100,7 @@ benchmark_model.add(tf.keras.layers.Dense(128, activation='relu'))
 benchmark_model.add(tf.keras.layers.Dropout(0.2))
 benchmark_model.add(tf.keras.layers.Dense(6, activation='softmax'))
 print(benchmark_model.summary())
-#kompilacja modelu NN
+# kompilacja modelu NN
 benchmark_model.compile(
   optimizer='adam',
   loss='categorical_crossentropy',
@@ -123,14 +116,14 @@ checkpointer = ModelCheckpoint(filepath='bestvalue', verbose=0, save_best_only=T
 callback_list = [checkpointer, earlystopping]
 
 Ilosc_iteracji = 14034/32
-#trenowanie modelu
+# trenowanie modelu
 history_model  = benchmark_model.fit(train_generator,epochs=benchmark_epoch, verbose=1, validation_data = validation_generator, callbacks=callback_list)
 
-#Evaluacja (ocena) modelu
+# evaluacja (ocena) modelu
 loss, accuracy = benchmark_model.evaluate(validation_generator)
 print(f"Loss: {loss:.2f}, Accuracy: {accuracy * 100:.2f}%")
 
-#Wykres  training i validation accuracy
+# wykres  training i validation accuracy
 plt.figure(figsize=(12, 6))
 plt.plot(history_model.history['acc'], label='Training Accuracy')
 plt.plot(history_model.history['val_acc'], label='Validation Accuracy')
@@ -141,7 +134,7 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
-#Wykres training i validation loss
+# wykres training i validation loss
 plt.figure(figsize=(12, 6))
 plt.plot(history_model.history['loss'], label='Training Loss')
 plt.plot(history_model.history['val_loss'], label='Validation Loss')
@@ -151,6 +144,7 @@ plt.ylabel('Loss')
 plt.legend()
 plt.grid(True)
 plt.show()
+
 
 def predict_image(filename, model):
     img_ = image.load_img(filename, target_size=(224, 224))
@@ -170,7 +164,7 @@ predict_image('static/Images/seg_pred/182.jpg', benchmark_model)
 predict_image('static/Images/seg_pred/5619.jpg', benchmark_model)
 predict_image('static/Images/seg_pred/5151.jpg', benchmark_model)
 
-#zapisanie modelu
+# zapisanie modelu
 # modelCNN_json - architektura sieci neuronowej
 # model.h5 - plik binarny z wagami
 modelCNN_json = benchmark_model.to_json()
@@ -180,16 +174,12 @@ with open("modelCNN.json", "w") as json_file:
 # zapisanie wag do HDF5
 benchmark_model.save_weights("model.h5")
 
-# zapisanie do zmiennej zapisanego wczęsniej modelu
+# zapisanie do zmiennej zapisanego wczesniej modelu
 json_file = open('modelCNN.json','r')
 loaded_model_json = json_file.read()
 json_file.close()
-
 loaded_model = model_from_json(loaded_model_json)
 
 # załadowanie wag w nowym modelu
-
 loaded_model.load_weights("model.h5")
 print("Załadowany wytrenowany wcześniej model")
-
-

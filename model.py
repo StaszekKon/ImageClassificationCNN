@@ -3,15 +3,12 @@ from keras.models import model_from_json
 from keras.preprocessing import image
 
 # załadowanie architektury modelu
-
 json_file = open('modelCNN.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
-
 loaded_model = model_from_json(loaded_model_json)
 
 # załadowanie wag w nowym modelu
-
 loaded_model.load_weights("model.h5")
 # przygotowanie i preprocessing obrazu
 
