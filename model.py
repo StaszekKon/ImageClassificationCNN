@@ -10,6 +10,8 @@ loaded_model = model_from_json(loaded_model_json)
 
 # załadowanie wag w nowym modelu
 loaded_model.load_weights("model.h5")
+
+
 # przygotowanie i preprocessing obrazu
 
 
@@ -41,5 +43,4 @@ def predict_result(img_processed):
     else:
         class_names = "zła predykcja"
 
-    # return np.argmax(pred[0])
     return class_names
