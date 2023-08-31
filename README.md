@@ -21,6 +21,10 @@ Steps are:
 + creation of two endpoints ("/", /prediction) 
 + use of Jinja2 templates, html, CSS
 
+<b>Sets: training, test - number of classes (categories) of images</b>
+<img src ="/static/Evaluate/class_train_test.png">
+<b>Sample pictures</b>
+<img src ="/static/Evaluate/examples_images.png">
 <b>Training results</b>
 <img src ="/static/Evaluate/Training_Validation_Accuracy.png">
 <img src ="/static/Evaluate/Training_Validation_Loss.png">

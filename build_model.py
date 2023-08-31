@@ -156,7 +156,6 @@ def predict_image(filename, model):
     img_processed /= 255.
     prediction = model.predict(img_processed)
     index = np.argmax(prediction)
-    # plt.title("Prediction - {}".format(str(class_names[index]).title()), size=18, color='red')
     plt.title(f"Prediction {str(class_names[index])}", size=18, color='red')
     plt.imshow(img_array)
 
