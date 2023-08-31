@@ -6,30 +6,30 @@
      <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
 </head>
 <body>
-<p> <b>Aplikacja API FLASK</b> służy do testowania (przewidywania, rozpoznawania) wytrenowanego modelu sieci neuronowej - CNN - klasyfikator obrazów 6 - klasowy.<br>
-        Projekt machine learning  dotyczy klasyfikacji -  obrazów podzielonych na 6 klas-kategorii (buildings,
+<p> <b>Flask API application</b> is used to test (predict, recognize) a trained neural network model - CNN - 6-class image classifier.<br>
+       The machine learning project concerns classification - images divided into 6 classes-categories (buildings,
         forest, glacier, mountain, sea, street).
-        <b>Zastosowana architektura</b> sieci neuronowej została zbudowana w konwencji sekwencyjnej.
-          Model oparty na CNN (architektura i wagi) został zbudowany podczas treningu i zapisany do pliku.
-          Na podstawie technologii Flask wykonano renderowanie 2 templates Jinja2, powstały 2 endpoints ("/", /predict).
+        <b>The neural network architecture</b> used was built in a sequential convention.
+         The CNN-based model (architecture and weights) was built during training and saved to a file.
+          Based on Flask technology, two  Jinja2 templates were rendered, two endpoints were created ("/", /predict).
 </p>
 <div class ="image">
     <img src="{{filename}}" alt="image">
 </div>
 <div class="class_prediction">
-    <p>Predykcja domyślniego obrazu: <b>{{class_names}}</b></p>
+    <p>Default image prediction: <b>{{class_names}}</b></p>
 </div>
 <form action="{{ url_for('predict_image_file') }}" enctype="multipart/form-data" method="POST">
     <div id="image_load">
        <p>
-            <label for="fimage"> Załaduj obraz:</label>
+            <label for="fimage"> Upload image:</label>
             <input type="file" id="fimage" name="uploaded-file" accept="image/jpg image/png" />
        </p>
     </div>
   <div id="button_prediction">
       <p>
-            <label for="fpredict"> Wykonaj predykcję załadowanego obrazu:</label>
-            <input type="submit" value="Predykcja" id="fpredict">
+            <label for="fpredict"> Predict the loaded image:</label>
+            <input type="submit" value="Prediction" id="fpredict">
       </p>
   </div>
 </form>

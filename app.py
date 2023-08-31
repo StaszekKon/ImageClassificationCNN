@@ -4,11 +4,12 @@ import os
 from werkzeug.utils import secure_filename
 
 IMAGES_FOLDER = os.path.join('static/Images', 'seg_pred')
-# Instancja app Flask
+# Flask app instance
 app = Flask(__name__)
 app.config['IMAGES_FOLDER'] = IMAGES_FOLDER
 
 
+# main endpoint
 @app.route("/")
 def main():
     full_filename = os.path.join(app.config['IMAGES_FOLDER'], '7110.jpg')
@@ -17,7 +18,7 @@ def main():
     return render_template("index.html", class_names=str(recognition), filename=full_filename)
 
 
-# trasa dla predykcji (endpoint)
+# prediction route (endpoint)
 @app.route('/predict', methods=['POST'])
 def predict_image_file():
     try:
@@ -31,7 +32,7 @@ def predict_image_file():
             return render_template("result.html", predictions=pred, file_name_img=full_filename)
 
     except:
-        error = "Plik nie może być przeprocesowany."
+        error = "The file cannot be processed."
         return render_template("result.html", err=error)
 
 

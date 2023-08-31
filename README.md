@@ -2,7 +2,7 @@
 This web application was created using the Flask framework and is about predicting images from 
 various nature scenes (classification into 1 out of 6 image categories) based on a deep learning model trained using convulsive neural networks.
 Dataset (24 335 images)
-Steps are:
+Steps are (run file build_model.py):
 + Build the model,
 + Compile the model,
 + Train / fit the data to the model,
