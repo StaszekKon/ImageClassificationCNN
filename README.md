@@ -18,3 +18,5 @@ Steps are:
 2. Run file app.py - instance of the Flask API (application web - html)
 + creation of two endpoint ("/", /prediction) 
 + use of Jinja2 templates, html, CSS
+
+<img src ="/static/Evaluate/Training_Validation_Accuracy.png" width="500" height="600">
