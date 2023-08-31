@@ -36,8 +36,8 @@ for folder in os.listdir(seg_train_folders):
 for folder in os.listdir(seg_test_folders):
     number_tes[folder] = len(os.listdir(seg_test_folders + folder))
 
-number_train = pd.DataFrame(list(number_tra.items()), index=range(0, len(number_tra)), columns=['class', 'count'])
-number_test = pd.DataFrame(list(number_tes.items()), index=range(0, len(number_tes)), columns=['class', 'count'])
+number_train = pd.DataFrame(list(number_tra.items()), index=range(0, len(number_tra)), columns=['class_train', 'count'])
+number_test = pd.DataFrame(list(number_tes.items()), index=range(0, len(number_tes)), columns=['class_test', 'count'])
 
 figure, ax = plt.subplots(1, 2, figsize=(20, 6))
 sns.barplot(x='class_train', y='count', data=number_train, ax=ax[0])
