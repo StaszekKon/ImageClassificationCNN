@@ -4,6 +4,7 @@ various nature scenes (classification into 1 out of 6 image categories) based on
 Dataset (24 335 images)
 
 Steps are:
+
 <b>1. Run file build_model.py:</b>
 + Build the model.
 + Compile the model.
@@ -15,6 +16,7 @@ Steps are:
 + Relu : given a value x, returns max(x, 0).
 + Softmax: 6 neurons, probability that the image belongs to one of the classes.
 + Save of the model (architecture, weights).
+
 <b>2. Run file app.py - instance of the Flask API (application web - html)</b>
 + creation of two endpoints ("/", /prediction) 
 + use of Jinja2 templates, html, CSS
