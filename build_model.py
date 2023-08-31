@@ -40,8 +40,8 @@ number_train = pd.DataFrame(list(number_tra.items()), index=range(0, len(number_
 number_test = pd.DataFrame(list(number_tes.items()), index=range(0, len(number_tes)), columns=['class', 'count'])
 
 figure, ax = plt.subplots(1, 2, figsize=(20, 6))
-sns.barplot(x='class', y='count', data=number_train, ax=ax[0])
-sns.barplot(x='class', y='count', data=number_test, ax=ax[1])
+sns.barplot(x='class_train', y='count', data=number_train, ax=ax[0])
+sns.barplot(x='class_test', y='count', data=number_test, ax=ax[1])
 
 print("Number of images in the train set : ", sum(number_tra.values()))
 print("Number of images in the test set ; ", sum(number_tes.values()))
@@ -58,7 +58,7 @@ train_generator = train_datagen.flow_from_directory(seg_train_folders,
                                                     class_mode='categorical',
                                                     target_size=(224, 224))
 
-validation_datagen = ImageDataGenerator(rescale=1.0 / 255.)  # normalizacja danych
+validation_datagen = ImageDataGenerator(rescale=1.0 / 255.)
 validation_generator = validation_datagen.flow_from_directory(seg_test_folders, shuffle=True, class_mode='categorical',
                                                               target_size=(224, 224))
 
