@@ -19,4 +19,6 @@ Steps are:
 + creation of two endpoint ("/", /prediction) 
 + use of Jinja2 templates, html, CSS
 
-<img src ="/static/Evaluate/Training_Validation_Accuracy.png" width="500" height="600">
+<b>Training results</b>
+<img src ="/static/Evaluate/Training_Validation_Accuracy.png">
+<img src ="/static/Evaluate/Training_Validation_Loss.png">
