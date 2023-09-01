@@ -30,5 +30,6 @@ Dataset (24 335 images)
 <b> Tests of the prediction based on app API Flask </b>
 <img src ="/static/Evaluate/main.png">
 <img src ="/static/Evaluate/prediction.png">
-<b>In the terminal, run the command python -m pytest</b>
+<b>3. In the terminal, run the command python -m pytest</b>
+
 Added only one test 
