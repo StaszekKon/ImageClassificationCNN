@@ -28,3 +28,6 @@ Steps are:
 <b>Training results</b>
 <img src ="/static/Evaluate/Training_Validation_Accuracy.png">
 <img src ="/static/Evaluate/Training_Validation_Loss.png">
+<b> Tests of the prediction based on app API Flask </b>
+<img src ="/static/Evaluate/main.png">
+<img src ="/static/Evaluate/prediction.png">

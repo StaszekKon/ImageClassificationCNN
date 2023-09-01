@@ -74,7 +74,7 @@ class_names = train_ds.class_names
 print(class_names)
 
 # visualization of data
-plt.figure(figsize=(10, 10))
+plt.figure(figsize=(15, 15))
 for images, labels in train_ds.take(1):
     for i in range(9):
         ax = plt.subplot(3, 3, i + 1)
@@ -114,7 +114,7 @@ earlystopping = EarlyStopping(monitor='val_loss',
                               verbose=1,
                               mode='min'
                               )
-checkpointer = ModelCheckpoint(filepath='bestvalue', verbose=0, save_best_only=True)
+checkpointer = ModelCheckpoint(filepath='best_model_value', verbose=0, save_best_only=True)
 callback_list = [checkpointer, earlystopping]
 
 number_of_iterations = 14034 / 32
@@ -156,7 +156,7 @@ def predict_image(filename, model):
     img_processed /= 255.
     prediction = model.predict(img_processed)
     index = np.argmax(prediction)
-    plt.title(f"Prediction {str(class_names[index])}", size=18, color='red')
+    plt.title(f"Prediction {str(class_names[index])}", size=20, color='blue')
     plt.imshow(img_array)
 
 
