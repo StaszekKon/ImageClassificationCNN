@@ -97,9 +97,9 @@ benchmark_model.add(tf.keras.layers.Conv2D(64, kernel_size=(3, 3), activation='r
 benchmark_model.add(tf.keras.layers.MaxPooling2D(2, 2))
 benchmark_model.add(tf.keras.layers.Flatten())
 benchmark_model.add(tf.keras.layers.Dense(1024, activation='relu'))
-benchmark_model.add(tf.keras.layers.Dropout(0.2))
+benchmark_model.add(tf.keras.layers.Dropout(0.25))
 benchmark_model.add(tf.keras.layers.Dense(128, activation='relu'))
-benchmark_model.add(tf.keras.layers.Dropout(0.2))
+benchmark_model.add(tf.keras.layers.Dropout(0.25))
 benchmark_model.add(tf.keras.layers.Dense(6, activation='softmax'))
 print(benchmark_model.summary())
 # compilation of the neural network model
